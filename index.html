@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Research Design for Large Scale Text Analysis
+</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+
+    th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+    td {padding: 3px; }
+    table { width: 100%; border-collapse: collapse;}
+    table.dataframe { 
+      width: 80%;
+      margin-left: 50px;
+      margin-top: 25px; 
+    }
+    table.dataframe>thead>tr>th {
+      border-color: black; 
+      background: linear-gradient(#1B1B1B, black); 
+    }
+    table.term-groups {
+      margin-top: 25px; 
+      margin-bottom: 25px; 
+    }
+    table.term-groups>tbody>tr>th {
+      border-color: black;
+      background: linear-gradient(#1B1B1B, black); 
+      text-align: left;
+      padding: 6px;
+      width: 25%;
+    }
+
+    table.term-groups>tbody>tr>td {
+      border-color: black;
+      text-align: left;
+      padding: 6px;
+    } 
+
+    td, th {border: 1px solid black; font-size: 95%; text-align: center;
+    }
+    body {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      color: rgba(34,34,34,.77);
+
+    }
+    
+    h1 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: black;
+      font-variant: small-caps;
+    }
+    h2 {
+      font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+      font-weight: normal;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h3, h4 {
+      
+      color: rgba(34,34,34,.77);
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h5 {
+        
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    p {
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .youtube {
+      width: 100%;
+      height: 45vh;
+    }
+    .middle {
+      background: linear-gradient(#8D8B8B, #e6e6e6);
+
+    }
+    .table-wrapper {
+      overflow-y: scroll;
+      width: 70%;
+      height: 100%;
+      margin-left: 10px;
+      /*display: block;
+      */
+    }
+    .remark-slide-content {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .remark-slide-content h1 {
+        font-size: 45px;
+    }
+    .remark-slide-content h2 {
+        font-size: 32px;
+    }
+    .remark-slide-content h3 {
+        font-size: 28px;
+    }
+    .remark-slide-content h4,h5 {
+        font-size: 22px;
+    }
+    img.hist {
+      width:55%;
+    }
+    h2.performance, h4.performance {
+      text-align:center;
+      margin-bottom: 25px;
+    }
+    div.performance {
+      padding-bottom:15px;
+      padding-top:15px; 
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    
+    }
+    #stopwords {
+      background-image: url(figures/stopwords_cm.png); 
+    }
+    #stop_pro {
+      background-image: url(figures/stop_pro_cm.png);
+    }
+    #stop_pro_names {
+      background-image: url(figures/stop_pro_names_cm.png);
+    }
+    #sentiment_pos {
+      background-image: url(figures/sentiment_pos_cm.png); 
+    }
+    #sentiment_neg {
+      background-image: url(figures/sentiment_neg_cm.png); 
+    }
+    #sentiment_all {
+      background-image: url(figures/sentiment_all_cm.png); 
+    }
+span.blank {
+  display: inline-block;
+  width: 180px;
+  border-bottom: 1px solid black;
+}
+    /* Chrome, Safari */
+    ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    }
+    ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+    }
+    ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    border-radius: 15px;
+    background-color: black;
+}
+  </style>
+  <script>
+
+  </script>
+</head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+# Research Design for Large Scale Text Analysis
+
+<br/>
+<br/>
+
+#### Matthew Lavin
+#### Clinical Assistant Professor of English
+#### Director of Digital Media Lab
+#### University of Pittsburgh
+#### May 2018
+
+---
+class: middle
+
+# What is Research Design, and How Does it Apply to Large Scale Text Analysis?
+
+- ### Sometimes referred to as experimental design 
+- ### Refers mainly to the 'basic architecture' of inquiry 
+- ### Ignatow and Mihalcea define it as a "sequence of decisions that allow theory, data, and research methods to interface in such ways as to maximize a project's ability to achieve its goals" (59)
+
+---
+class: middle
+
+# Common Phases of Research Design
+
+### 1. Choosing a topic
+### 2. Explore scholarly field and evidentiary archive
+### 3. Generate research question or problem
+### 4. Structure a qualitative or quantitative way of addressing the question
+### 5. Operationalize your method computationally
+### 6. Locate or create a corpus
+### 7. Execute the computation on the corpus
+### 8. Evaluate and interpret results
+
+???
+(not necessarily in this order)
+
+---
+class: middle
+
+# An Example of Research Design:
+
+## Research Question
+
+- ### Can machine learning predict the presumed gender of the book's author?
+
+- ### If so, how do gendered term features inform prior scholarship on readership at this time?
+
+
+???
+
+- #### If so, what are the superficial features that predict presumed gender?
+- #### What are the topical features that predict presumed gender?
+- #### What are the evaluative features that predict presumed gender?
+- #### What hypotheses or research questions can we form for large scale analysis of gender and book reviews?  
+- #### How might these hypotheses speak to prior scholarship on readership and gender at this time?
+
+
+---
+class: middle
+
+# An Example of Research Design:
+
+## Corpus Development
+
+<br/>
+
+- ### <em>The New York Times Book Review</em>
+- ### Picked a Year: 1905
+- ### Approximately 4,000 articles
+- ### Approximately 1,000 book reviews
+- ### Genders of reviewed work's author tagged "assumed male," "assumed female," "multi," or "unknown"
+- ### Assumed means assumed by the reviewer, not me
+
+???
+
+  - #### Gold data 
+  - #### Metadata taken from <em>The New York Times</em> API
+  - #### After hand-coding categories of content, selected approximately 1,000 book reviews
+  - #### Each review focuses on a single book
+  - #### Genders of reviewed work's author tagged "assumed male," "assumed female," "multi," or "unknown"
+  - #### Coding reflects review's subjectivity, not objective gender or sex of reviewed author
+  - #### Reviews are often anonymous
+  - #### Not feasible to code genders of book reviewers
+
+---
+class: middle
+
+# An Example of Research Design:
+
+## Methods
+
+- ### Computational Text Processing
+ 
+- ### Machine Learning to Predict Labeled Gender
+
+- ### Shuffe and Repeat to Score Accuracy of Predictions
+
+- ### Feature Selection to Isolate Meaningful Terms
+
+- ### Hopefully Scale Up
+
+???
+ - #### OCR on NYT book reviews for all Labeled "assumed male" and "assumed female
+ - #### NLP to normalize text and lemmatize
+ - #### TF-IDF expressed in vector space
+ - #### Randomized partition to training and test with 200 test reviews
+ - #### Logistic regression (supervised, binary model) and evaluate accuracy
+ - #### Reshuffle training and test and repeat 999 more times, save results
+ - #### Do all above steps using six feature selection methods
+
+---
+class: middle
+
+# Exploring Text Data with TF-IDF
+
+- ### Term frequency is word count divided by document length
+ - ### The most frequent words tend to be same for all documents (the, be, to, of, and, a)
+- ### TF-IDF is Term Frequency - Inverse Document Frequency 
+ - ### Frequency is dvided by the term's frequency in all documents
+ - ### Shows you terms that are uncharacteristically common in a document
+
+---
+class: middle
+
+# When is TF-IDF a Good Choice?
+
+- ### Lots of text representing a common topic
+- ### Birdseye view of dinstinct words
+- ### Less computationally complex than other summarizing algorithms
+- ### Less computationally expensive than LDA, MMF, etc (i.e. faster to run)
+- ### Less sensitive to context than topic models or word embeddings
+
+---
+class: middle
+
+# Activity: TF-IDF with book reviews
+
+<br/>
+
+### The Github repo folder labelled "keywords" has 10 csv files in it. Each file is a list of the top 20 TF-IDF scores for a book review. Each review has the term _garden_ in that top 20 list, but the other items on the list vary greatly. 
+
+- ### In small groups (3-4 people) look at the data files and formulate a hypothesis about any patterns or trends that seem apparent. 
+
+- ### Try generating your own question that TF-IDF lists could help you explore. 
+
+- ### If you have time, take a look at the original book reviews. They are in the 'pdfs' folder, and each pdf filename matches a filename from the "keywords" folder.
+
+---
+class: middle
+
+# Common computations in large scale text analysis
+
+- #### TF-IDF
+- #### Keyword extraction and/or algorithmic summarization
+- #### Latent Semantic Analysis, Latent Dirichlet Allocation (topic modelling)
+- #### Various other clustering and factorization algorithms
+- #### Word embeddings (word2vec)
+- #### Correlation and collocation analysis
+- #### Entity recognition or extraction (often combined with other techniques)
+- #### n-gram analysis (often combined with other techniques)
+- #### Supervised learning approaches 
+- #### Network analysis approaches
+
+See Mehdi Allahyari et al., "Text Summarization Techniques: A Brief Survey," arXiv:1707.02268 [cs], July 7, 2017, http://arxiv.org/abs/1707.02268.
+
+---
+class: middle
+
+# Key Concepts in Research Design
+
+- ### Qualitative, quantitative, hermeneutic, mixed 
+- ### Nomothetic and Idiographic Practices
+- ### Independent and dependent variables
+- ### Correlation vs. causality
+- ### Comparison and significant difference
+- ### Sampling and representativeness
+- ### Algorithmic fluency
+
+---
+class: middle
+
+# Activity: Connect this information to your scholarship
+
+### Wayne C. Booth's _The Craft of Research_ describes the importance of looking ahead when forming your research questions "to consider how your work might strike others" (45). Looking at what I've said so far about research design for large scale text analysis, how might this kind of inquiry connect to an existing theory or "so what" question from your field or specialty? What are the significant questions that a large scale archive of texts might inform? 
+
+---
+class: middle
+
+# Activity:
+
+### 1. Identify a major concern of your discipline (some fields will have more direct connections to text analysis than others)
+### 2. If a direct connection isn’t obvious, try formulating one like this:
+
+<blockquote><h3>To do a comparable study in my field, I would want a corpus of <span class="blank"></span> and I would want to look closely at <span class="blank"></span></h3></blockquote>
+
+### Working independently, write down a few thoughts and, after about 5-7 minutes, we will share our observations. 
+
+???
+Discuss generating a research question or problem
+Discuss structuring a qualitative or quantitative way of addressing the question or problem
+
+---
+class: middle
+
+# Mistakes and Areas of Concern in Research Design 
+
+- ### Poorly defined research problem 
+- ### Lack of theoretical framework 
+- ### Unclear contribution to the field 
+- ### Poor methodological approach (includes selection bias in corpus development)
+- ### Failure to acknowledge limitations of the study
+
+### See also http://libguides.usc.edu/writingguide/purpose 
+
+---
+class: middle
+
+# Activity: Search for Corpora
+
+### Revisit the question related to your field or your interests that we generated in the last discussion. 
+
+- ### <strong>Option 1</strong>: Bearing in mind how you think you want to analyze or measure texts, try to locate an appropriate text-based dataset or corpus. 
+
+- ### <strong>Option 2</strong>: If you can't find a dataset/corpus that would allow you to investigate your topic, try to find a suitable dataset that's similar to your topic in some way, or see how close you can get to your topic. 
+
+- ### <strong>Option 3</strong>: Try to find digitized texts or web-based materials out of which a dataset/corpus for your topic could be built.
+
+---
+class: middle
+
+# Activity: Search Tips
+
+- ### Many datasets are publicly available and can be found with a simple Google search (e,g, "Amazon product reviews dataset"). 
+- ### You can also search around for large dataset sharing or indexing platforms like datahub.io, figshare.com, humanitiesdata.com, kaggle.com, zenodo.org. 
+- ### Finally, pubished articles will often announce a new corpus or dataset, so keyword searches on pitcatt+, Google scholar, and arxiv.org can be helpful. 
+
+
+???
+
+Discuss operationalizing your method computationally
+
+---
+class: middle
+
+# Next Steps
+
+- ### Look for articles like Mehdi Allahyari et al., "Text Summarization Techniques: A Brief Survey" to get a sense of the approaches scholars are most excited about.
+
+- ### Look for implementations of algorithms in your programming language of choice (e.g. Python), or as interactive software like MALLET and antconc
+
+- ### Learn more about algorithms by learning how to code them
+
+---
+class: middle
+
+# Next Steps
+
+- ### Consider getting books like:
+ - #### Wayne C. Booth's _The Craft of Research_ (general source on academic research) 
+ - #### Ignatow and Mihalcea's _An Introduction to Text Mining: Research Design, Data Collection, and Analysis_ 
+ - #### Jesse Lawson's _Data Science in Higher Education: A Step-by-Step Introduction to Machine Learning for Institutional Researchers_
+ - #### Konrad H. Jarausch's _Quantitative Methods for Historians: A Guide to Research, Data, and Statistics_ 
+- ### Possibly related: I'm teaching a fall graduate class at Pitt, "Digital Humanities Approaches to Textual Objects." (Six spots left) https://dh-fall-2018.matthew-lavin.com/
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
